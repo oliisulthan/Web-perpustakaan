@@ -7,7 +7,7 @@ session_destroy();
 setcookie('yup','', time() - 3600);
 setcookie('yek', '', time() - 3600 );
 
-header("Location:index.php");
+header("Location:loginAdm.php");
 exit;
 
 

@@ -13,7 +13,7 @@
         <li><a href="Mahasiswa.php">Lihat Data Member</a></li>
         <li><a href="tambahBuku.php">+Tambah Data Buku</a></li>
         <li><a href="tambahDataMember.php">+Tambah Member</a></li>
-        <li><a href="index.php">Logout</a></li>
+        <a href="logout.php">Logout</a>
     </ul>
     
     
