@@ -1,54 +1,24 @@
 <?php
-session_start();
+
 require 'function.php';
-//cek cookie
-if(isset($_COOKIE['yup']) && isset($_COOKIE['yek'])){
-    $id = $_COOKIE['yup'];
-    $key = $_COOKIE['yek'];
-
-    //ambil username berdasarkan id
-    $result = mysqli_query($conn, "SELECT username FROM user WHERE id=$id ");
-    $rows = mysqli_fetch_assoc($result);
 
 
-    //cek cookie dan user name
-    if($key === hash('sha256' , $row['username'])){
-        $_SESSION['login'] = true;
+if(isset($_POST["register"])){
+    if(register($_POST) > 0){
+        echo"<script>
+        alert('user berhasil di tambahkan');
+        </script>";
+    }else{
+        mysqli_error($conn);
+
     }
-}
-if(isset($_SESSION["login"])){
-    header("Location:home.php");
-    exit;
-}
-
-
-
-if(isset($_POST["login"])){
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-
-    $result = mysqli_query($conn,"SELECT * FROM user WHERE nama = '$username'");
-
-    if(mysqli_num_rows($result) === 1){
-        $row = mysqli_fetch_assoc($result);
-        if(password_verify($password, $row["password"])){
-            //cek session
-            $_SESSION["login"] = true;
-            //buat cookie login
-            if(isset($_POST["remember"])){
-
-                setcookie('yup',$row["id"],time() + 60 );
-                setcookie('yek',hash('sha256',$row["username"]),time() + 60);
-            }
-            header("Location: home.php");
-            exit;
-        }
-    }
-    $error = true;
 }
 
 
 ?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -56,24 +26,40 @@ if(isset($_POST["login"])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Register</title>
+    <style>
+        label{
+            display: block;
+        }
+    </style>
 </head>
 <body>
-
-    <h1>Login, Selamat datang</h1>
-    <?php if(isset($error)):?>
-    <p style="color: red; font-style:italic">Username/Password Salah</p>
-    <?php endif;?>
+    <h1>Register</h1>
     <form action="" method="post">
-    <label for="user">Masukan User Name:</label><br>
-    <input type="text" name="username" id="user" placeholder="Masukan Username"><br><br>
-    
-    <label for="password">Masukan Password</label><br>
-    <input type="password" name="password" id="password" placeholder="Masukan Password"><br><br>
-    <input type="checkbox" name = "remember" id="remember"><label for="remember">remember me</label><br>
-    <button type ="submit" name="login">LogIn!</button>
+    <ul>
+        <li>
+        <label for="nama">Nama</label>
+        <input type="text" id ="nama" name="nama"placeholder="Masukan Nama Anda">
+        </li>
 
-    
+        <li>
+            <label for="E-mail">E-mail</label>
+            <input type="text" id="email" name="email" placeholder="Masukan E-Mail Anda">
+        </li>
+        
+        <li>
+        <label for="password">Password</label>
+        <input type="password" id="password" name ="password" placeholder="Masukan password">
+        </li>
+        
+        <li>
+        <label for="cPassword">Konfirmasi Password</label>
+        <input type="password" id="cPassword" name="cPassword" placeholder="Konfirmasi Password">
+        </li>
+
+        <li><button type="submit" name="register">Registrasi!</button></li>
+
+    </ul>
 
 
     </form>
