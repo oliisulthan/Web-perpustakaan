@@ -3,8 +3,8 @@
 require 'function.php';
 
 
-if(isset($_POST["submit"])){
-    if(Admin($_POST) > 0){
+if(isset($_POST["register"])){
+    if(adm($_POST) > 0){
         echo"<script>
         alert('user berhasil di tambahkan');
         </script>";
@@ -41,11 +41,6 @@ if(isset($_POST["submit"])){
         <label for="nama">Nama</label>
         <input type="text" id ="nama" name="nama"placeholder="Masukan Nama Anda">
         </li>
-
-        <li>
-            <label for="E-mail">E-mail</label>
-            <input type="text" id="email" name="email" placeholder="Masukan E-Mail Anda">
-        </li>
         
         <li>
         <label for="password">Password</label>
@@ -57,7 +52,7 @@ if(isset($_POST["submit"])){
         <input type="password" id="cPassword" name="cPassword" placeholder="Konfirmasi Password">
         </li>
 
-        <li><button type="submit" name="submit">Registrasi!</button></li>
+        <li><button type="submit" name="register">Registrasi!</button></li>
 
     </ul>
 
