@@ -3,8 +3,8 @@
 require 'function.php';
 
 
-if(isset($_POST["register"])){
-    if(register($_POST) > 0){
+if(isset($_POST["submit"])){
+    if(Admin($_POST) > 0){
         echo"<script>
         alert('user berhasil di tambahkan');
         </script>";
@@ -57,7 +57,7 @@ if(isset($_POST["register"])){
         <input type="password" id="cPassword" name="cPassword" placeholder="Konfirmasi Password">
         </li>
 
-        <li><button type="submit" name="register">Registrasi!</button></li>
+        <li><button type="submit" name="submit">Registrasi!</button></li>
 
     </ul>
 
